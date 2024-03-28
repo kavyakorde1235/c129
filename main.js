@@ -1,5 +1,5 @@
 song= "";
-song= "";
+song1= "";
 
 scoreLeftWrist=0;
 scoreRightWrist=0;
@@ -13,7 +13,7 @@ rightWristX = 0;
 
 function preload(){
     song=loadSound("music.mp3");
-    song=loadSound("music2");
+    song1=loadSound("music2.mp3");
 }
 
 function setup(){
@@ -23,12 +23,13 @@ function setup(){
     video=createCapture(VIDEO);
     video.hide();
 
-     console.log('poseNet is initialised')
+    poseNet = ml5.poseNet(video, modelLoaded);
+     poseNet.on('pose', gotPoses);
+     
 }
 
 function modelLoaded(){
-    poseNet = ml5.poseNet(video, modelLoaded);
-     poseNet.on('pose', gotPoses);
+    console.log('poseNet is initialised')
 }
 
 function gotPoses(results){
@@ -113,3 +114,19 @@ function draw(){
               }
             }
         }
+        // if(scoreLeftWrist>0.2){
+        //     circle(leftWristX,leftWristY,20);
+            
+        //         InNumberleftWristY = Number(leftWristY);
+        //         remove_decimals=floor(InNumberleftWristY);
+        //         volume=remove_decimals/500;
+        //         document.getElementById("volume").innerHTML = "Volume = " + volume;
+        //          song.setVolume(volume);
+        //         }
+            
+            
+    //         function play(){
+    //             song.play();
+    //             song.setVolume(1);
+    //             song.rate(0.5);
+            // }
